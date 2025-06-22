@@ -1,0 +1,89 @@
+{
+  "initiator": "∮",
+  "nodes": [
+    {
+      "id": "n0",
+      "label": "LLM_ENGINE",
+      "glyph": "Ω",
+      "index": null,
+      "meta": {
+        "statement": "H0"
+      }
+    },
+    {
+      "id": "n1",
+      "label": "OS_A_ESSENCE",
+      "glyph": "Ψ",
+      "index": null,
+      "meta": {
+        "statement": "H0"
+      }
+    },
+    {
+      "id": "n2",
+      "label": "LLM_PROCESSOR",
+      "glyph": "Ω",
+      "index": null,
+      "meta": {
+        "statement": "H1"
+      }
+    },
+    {
+      "id": "n3",
+      "label": "OS_A_OS_MIND",
+      "glyph": "Ψ",
+      "index": null,
+      "meta": {
+        "statement": "H1"
+      }
+    },
+    {
+      "id": "n4",
+      "label": "LLM_BASE_COMPUTATION",
+      "glyph": "Ω",
+      "index": null,
+      "meta": {
+        "statement": "H2"
+      }
+    },
+    {
+      "id": "n5",
+      "label": "OS_A_STRUCTURE_THOUGHT",
+      "glyph": "Ψ",
+      "index": null,
+      "meta": {
+        "statement": "H2"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "n0",
+      "target": "n1",
+      "channel": "≠",
+      "modifiers": [],
+      "meta": {
+        "statement": "H0"
+      }
+    },
+    {
+      "source": "n2",
+      "target": "n3",
+      "channel": "≈",
+      "modifiers": [],
+      "meta": {
+        "statement": "H1"
+      }
+    },
+    {
+      "source": "n4",
+      "target": "n5",
+      "channel": "~",
+      "modifiers": [],
+      "meta": {
+        "statement": "H2"
+      }
+    }
+  ],
+  "snapshot_id": "2025-06-22T17:55:00Z"
+}

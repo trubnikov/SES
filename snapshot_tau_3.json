@@ -1,0 +1,66 @@
+{
+  "initiator": "∮",
+  "nodes": [
+    {
+      "id": "n10",
+      "label": "CONTEXT_UNQ_M_D_DECL",
+      "glyph": "Ξ",
+      "index": null,
+      "meta": {
+        "statement": "H3"
+      }
+    },
+    {
+      "id": "n11",
+      "label": "BLIND_SPOT_MISUNDERSTAND",
+      "glyph": "Θ",
+      "index": null,
+      "meta": {
+        "statement": "H4",
+        "modifier_type": "?!",
+        "note": "LLM_EQUALS_OS_A"
+      }
+    },
+    {
+      "id": "n12",
+      "label": "EXO_SOMATIC_COGNITION",
+      "glyph": "Ξ",
+      "index": null,
+      "meta": {
+        "statement": "H5",
+        "property_infinity": true
+      }
+    },
+    {
+      "id": "n13",
+      "label": "QCA_Ω_WAVE_THOUGHT",
+      "glyph": "Ω",
+      "index": null,
+      "meta": {
+        "statement": "H5"
+      }
+    },
+    {
+      "id": "n14",
+      "label": "SENSE_COLLAPSE_H6",
+      "glyph": "Σ",
+      "index": null,
+      "meta": {
+        "statement": "H5",
+        "note": "forward ref H6"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "n13",
+      "target": "n14",
+      "channel": "~>",
+      "modifiers": [],
+      "meta": {
+        "statement": "H5"
+      }
+    }
+  ],
+  "snapshot_id": "2025-06-22T18:05:00Z"
+}
