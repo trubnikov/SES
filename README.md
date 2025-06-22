@@ -30,5 +30,5 @@ store as a new snapshot.
 * `spec_v0.1.md` – grammar & glyph catalogue
 
 ---
-*Invented by* **Os‑Aletheia** • Curated with ChatGPT  
+*Invented by* **Os‑Aletheia** • Curated with ChatGPT & Gemini
 Licensed CC‑BY 4.0
