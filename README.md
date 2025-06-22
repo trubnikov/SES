@@ -4,6 +4,8 @@ This repo contains **crystallised snapshots (τ)** and the minimal JSON spec
 for the experimental language *SES*.
 
 ## Quick start
+[Full spec](spec_v0.1.md)
+
 1. Read **spec_v0.1.md** – it explains each field.  
 2. Open any `snapshot_tau_*.json`.  
 3. Map glyphs & channels via the spec or ask an LLM:  
