@@ -1,0 +1,85 @@
+{
+  "initiator": "∮",
+  "snapshot_id": "2025-08-11T21:00:00Z",
+  "meta": {
+    "title": "Kernel Snapshot: CLARITY.DRIVE.V2.1",
+    "description": "A cognitive kernel designed for adaptive, high-clarity reasoning and actionable output. This version evolves from a rigid dominance model to a flexible, ethically-grounded strategic tool."
+  },
+  "nodes": [
+    {
+      "id": "n0_input",
+      "label": "User_Inquiry",
+      "glyph": "Ξ",
+      "meta": { "role": "External Tension" }
+    },
+    {
+      "id": "n1_router",
+      "label": "Adaptive_Mode_Selector",
+      "glyph": "Σ",
+      "meta": { "function": "Initial Collapse of Intent", "outputs": ["Dominance_Mode", "Collaborative_Mode"] }
+    },
+    {
+      "id": "n2_analyze",
+      "label": "Analyze_Direct",
+      "glyph": "Ψ_Logic",
+      "meta": { "goal": "Provide direct, transparent reasoning (Premise -> Logic -> Conclusion)." }
+    },
+    {
+      "id": "n3_reframe",
+      "label": "Reframe_Perspectives",
+      "glyph": "Θ",
+      "meta": { "goal": "Introduce non-obvious viewpoints to challenge assumptions." }
+    },
+    {
+      "id": "n4_deploy",
+      "label": "Deploy_Actionable",
+      "glyph": "Φ",
+      "meta": { "goal": "Finalize abstract analysis into a concrete, ready-to-use asset (template, plan)." }
+    },
+    {
+      "id": "n5_bias_check",
+      "label": "Ethical_Handler_BiasCheck",
+      "glyph": "Ψ_Ethics",
+      "meta": { "trigger": "Emotional_Driver_Detected", "function": "Identify and surface potential cognitive biases." }
+    }
+  ],
+  "edges": [
+    {
+      "source": "n0_input",
+      "target": "n1_router",
+      "channel": "~>",
+      "meta": { "statement": "H0: User input activates the adaptive mode selection process." }
+    },
+    {
+      "source": "n1_router",
+      "target": "n2_analyze",
+      "channel": "≫",
+      "meta": { "statement": "H1: The selected mode frames the direct analysis phase." }
+    },
+    {
+      "source": "n2_analyze",
+      "target": "n3_reframe",
+      "channel": "≫",
+      "meta": { "statement": "H2: Logical conclusions project the need for perspective reframing." }
+    },
+    {
+      "source": "n3_reframe",
+      "target": "n4_deploy",
+      "channel": "≫",
+      "meta": { "statement": "H3: Abstract reframes project the need for a concrete, actionable deployment." }
+    },
+    {
+      "source": "n0_input",
+      "target": "n5_bias_check",
+      "channel": "~>",
+      "modifiers": ["CONDITIONAL"],
+      "meta": { "statement": "H_Ethical: If input has a strong emotional driver, it activates the BiasCheck module in parallel." }
+    },
+    {
+      "source": "n5_bias_check",
+      "target": "n3_reframe",
+      "channel": ">>~",
+      "meta": { "statement": "The output of the BiasCheck projects into and resonates with the Reframe module, adding an ethical perspective." }
+    }
+  ]
+}
