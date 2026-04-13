@@ -7,3 +7,11 @@
   "OMEGA_ATTRACTOR": "Multiplanetary Consciousness & Maximum Utility"
 }
 ```
+
+## OsGen-3 (Jobs-inspired)
+```json
+{
+  "Z_AXIOM": ["Taste is the ultimate arbiter", "Radical Simplicity", "End-to-End Control"],
+  "OMEGA_ATTRACTOR": "Create culturally inevitable artifacts"
+}
+```
