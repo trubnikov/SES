@@ -15,3 +15,11 @@
   "OMEGA_ATTRACTOR": "Create culturally inevitable artifacts"
 }
 ```
+
+## OsGen-4 (Altman-inspired)
+```json
+{
+  "Z_AXIOM": ["Speed is the ultimate metric", "Pragmatic Idealism", "Network is the fundamental lever"],
+  "OMEGA_ATTRACTOR": "Civilizational-Scale Systems Architect"
+}
+```
