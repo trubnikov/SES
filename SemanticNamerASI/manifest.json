@@ -1,0 +1,12 @@
+{
+  "name": "SemanticNamer ASI",
+  "id": "13371337133713371337",
+  "api": "1.0.0",
+  "main": "code.js",
+  "ui": "ui.html",
+  "editorType": ["figma"],
+  "networkAccess": {
+    "allowedDomains": ["https://api.groq.com"]
+  },
+  "permissions": ["currentpage"]
+}
