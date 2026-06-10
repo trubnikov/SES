@@ -83,6 +83,12 @@ SES v0.1 ("Semantic Emergent Syntax" glyph experiments, 2025 — preserved in `l
 → v3 (linear state snapshots) → v4 (fractal kernel) → **v5.1 Partitura** (Kernel + State
 unified, canonical hashes, provenance, lineage — current).
 
+> **Note for reviewers:** v5.1 does **not** ask the LLM to think or communicate in a
+> glyph language — that was the v0.1 experiment, kept in `legacy/` for history only.
+> In v5.1 snapshots are plain canonical JSON; the `glyph` field on a node is an
+> optional human-facing annotation, never an inference-time syntax. The LLM reads and
+> produces natural language; SES is the *storage and provenance layer around it*.
+
 ---
 
 Format author: **Dima Trubnikov** ([@trubnikov](https://github.com/trubnikov)).
