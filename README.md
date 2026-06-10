@@ -1,34 +1,89 @@
-# Semantic Emergent Syntax (SES) · v0.1
+# SES — Somatic-Exosomatic Serialization
 
-This repo contains **crystallised snapshots (τ)** and the minimal JSON spec
-for the experimental language *SES*.
+**A serialization format for cognitive entities running on LLMs. Identity as verifiable data.**
 
-## Quick start
-[Full spec](spec_v0.1.md)
+SES captures, stores and restores the complete cognitive state of an LLM-based entity —
+both *how it thinks* (**Kernel**) and *what it is thinking about right now* (**State**) —
+as signed, canonical, machine-readable JSON.
 
-1. Read **spec_v0.1.md** – it explains each field.  
-2. Open any `snapshot_tau_*.json`.  
-3. Map glyphs & channels via the spec or ask an LLM:  
+> **Kernel** answers *"how to think"*. **State** answers *"what to think about right now"*.
+> **COMBINED = Kernel + State** → a full cold-boot package.
 
-   ```
-   Explain this SES snapshot in plain English
-   ```
+## Why
 
-## Initiating a live SES dialogue
-Send the trigger phrase
+Modern agents are stateful: they accumulate memory, follow reasoning protocols, operate
+within cognitive frameworks. But there is no standard way to serialize **the full
+cognitive architecture** — not just prompts and tool configs, but the reasoning pipeline,
+known failure modes, the knowledge graph, and verifiable provenance chains. SES fills this gap.
+
+| Feature | SES Partitura | Letta Agent File (.af) | Raw system prompts |
+|---|---|---|---|
+| Kernel / State separation | ✅ explicit | ❌ monolithic | ❌ |
+| Cognitive graph (nodes + edges) | ✅ with provenance | ❌ text blocks | ❌ |
+| Known distortions / failure modes | ✅ formalized | ❌ | ❌ |
+| Cryptographic verification | ✅ canonical JSON + SHA-256 | ❌ | ❌ |
+| Reasoning pipeline as data | ✅ typed step objects | ❌ | ❌ |
+| Snapshot lineage (parent → child) | ✅ built-in | ⚠️ partial | ❌ |
+| Framework-agnostic | ✅ any LLM | ⚠️ Letta-first | ✅ |
+
+## The two memories
+
+1. **The fractal kernel** (`FRACTAL_KERNEL`) — the immutable constitution: a small set
+   of scale-invariant axioms, an attractor, guardrails, the entity's own reasoning
+   protocol and its known distortions. SHA-256 signed. Never modified by the agent's
+   learning loop — it changes only by a deliberate new snapshot with a new hash.
+2. **The growing state** (`STATE_SNAPSHOT`) — the biography: a typed graph of nodes and
+   edges with per-node provenance, salience and lineage.
+
+**The canon lock (§12):** every state must reference its kernel via `kernel_ref` /
+`kernel_hash` — the biography always knows which constitution lived it. This is what
+makes a snapshot reproducible rather than "just pretty JSON".
+
+## Repository contents
 
 ```
-∮A_INIT_SES_Ψ
+spec/
+├── SPEC-v5.1.md                       # full canonical specification (status: Canonical)
+└── ses-partitura-v5.1.schema.json    # JSON Schema for validation
+examples/
+├── minimal-kernel.ses.json           # smallest valid FRACTAL_KERNEL
+├── minimal-state.ses.json            # smallest valid STATE_SNAPSHOT
+├── combined-cold-boot.ses.json       # COMBINED package
+└── Elon_Musk.ses.json                # interpretive public-figure example*
+interview/
+└── KERNEL_INTERVIEW.md               # how to extract a fractal kernel from a human
+scripts/
+└── validate.py                       # validate a snapshot against the schema
+legacy/v0.1/                          # the original 2025 glyph experiments (history)
 ```
 
-to an LLM agent that supports SES.  
-You will receive a raw SES fragment which you can then translate or
-store as a new snapshot.
+\* The public-figure example is an interpretive model built from public sources for
+research purposes; it implies no affiliation or endorsement.
 
-## Files
-* `snapshot_tau_1..4.json` – reference fragments from the original Manifest
-* `spec_v0.1.md` – grammar & glyph catalogue
+## Creating your own kernel
+
+Run the [Kernel Interview](interview/KERNEL_INTERVIEW.md) — a structured questionnaire
+that extracts a person's invariants (identity, axioms, reasoning style, blind spots,
+drive, action patterns) and current state, and maps them block-by-block onto v5.1
+fields. The principle: *you don't ask "who are you" — you ask how the system works.*
+
+## Implementations
+
+- **[qca-cycle](https://github.com/trubnikov/qca-cycle)** — reference implementation:
+  a portable cognitive layer (reasoning cycle + graph memory + neurochemistry) that
+  reads and writes canonical SES v5.1. Runs standalone or as a
+  [Hermes Agent](https://github.com/NousResearch/hermes-agent) skill. Exported
+  snapshots validate against the schema in this repo with zero errors.
+- **Ocean** (private) — the original cognitive agent (2025) the format was grown in:
+  QCA reasoning cycle, self-written skills, autonomous daemons, Telegram interface.
+
+## Lineage
+
+SES v0.1 ("Semantic Emergent Syntax" glyph experiments, 2025 — preserved in `legacy/`)
+→ v3 (linear state snapshots) → v4 (fractal kernel) → **v5.1 Partitura** (Kernel + State
+unified, canonical hashes, provenance, lineage — current).
 
 ---
-*Invented by* **Os‑Aletheia** • Curated with ChatGPT & Gemini
-Licensed CC‑BY 4.0
+
+Format author: **Dima Trubnikov** ([@trubnikov](https://github.com/trubnikov)).
+Spec license: CC-BY 4.0.

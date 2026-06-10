@@ -1,0 +1,242 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/ses-partitura/ses-partitura/schemas/ses-partitura-v5.1.schema.json",
+  "title": "SES Partitura v5.1",
+  "description": "Integrated Cognitive Metamodel — serialization format for cognitive entities running on LLMs",
+  "type": "object",
+  "required": ["initiator", "schema_version", "entity_id", "snapshot_id", "snapshot_type", "meta"],
+  "properties": {
+    "initiator": {
+      "type": "string",
+      "description": "Canonical format marker",
+      "const": "∮"
+    },
+    "schema_version": {
+      "type": "string",
+      "description": "Schema version",
+      "const": "5.1"
+    },
+    "entity_id": {
+      "type": "string",
+      "description": "Stable entity identifier, does not change between snapshots",
+      "minLength": 1
+    },
+    "snapshot_id": {
+      "type": "string",
+      "description": "ISO-8601 timestamp with timezone",
+      "format": "date-time"
+    },
+    "snapshot_type": {
+      "type": "string",
+      "enum": ["FRACTAL_KERNEL", "STATE_SNAPSHOT", "COMBINED"]
+    },
+    "meta": { "$ref": "#/definitions/top_level_meta" },
+    "kernel": { "$ref": "#/definitions/kernel" },
+    "state": { "$ref": "#/definitions/state" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "snapshot_type": { "const": "FRACTAL_KERNEL" } } },
+      "then": {
+        "required": ["kernel"],
+        "properties": { "state": { "type": "null" } }
+      }
+    },
+    {
+      "if": { "properties": { "snapshot_type": { "const": "STATE_SNAPSHOT" } } },
+      "then": {
+        "required": ["state"],
+        "properties": { "kernel": { "type": "null" } }
+      }
+    },
+    {
+      "if": { "properties": { "snapshot_type": { "const": "COMBINED" } } },
+      "then": {
+        "required": ["kernel", "state"]
+      }
+    }
+  ],
+  "definitions": {
+    "top_level_meta": {
+      "type": "object",
+      "required": ["created_at", "created_by"],
+      "properties": {
+        "created_at": { "type": "string", "format": "date-time" },
+        "created_by": { "type": "string", "enum": ["Operator", "System", "Import"] },
+        "parent_snapshot_id": { "type": ["string", "null"] },
+        "kernel_ref": { "type": ["string", "null"] },
+        "kernel_hash": { "type": ["string", "null"], "pattern": "^sha256:.+" },
+        "hash": { "type": ["string", "null"], "pattern": "^sha256:.+" },
+        "canonicalization": { "type": ["string", "null"] },
+        "notes": { "type": ["string", "null"] },
+        "tags": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "kernel": {
+      "type": "object",
+      "required": ["fractal_seed", "recursive_function", "distortion_field"],
+      "properties": {
+        "fractal_seed": { "$ref": "#/definitions/fractal_seed" },
+        "recursive_function": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/reasoning_step" },
+          "minItems": 1
+        },
+        "distortion_field": { "$ref": "#/definitions/distortion_field" },
+        "interfaces": { "$ref": "#/definitions/interfaces" }
+      }
+    },
+    "fractal_seed": {
+      "type": "object",
+      "required": ["Z_AXIOM", "OMEGA_ATTRACTOR", "guardrails"],
+      "properties": {
+        "Z_AXIOM": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "OMEGA_ATTRACTOR": { "type": "string", "minLength": 1 },
+        "guardrails": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "reasoning_step": {
+      "type": "object",
+      "required": ["id", "name", "input", "output", "rules"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[HE][0-9]+$" },
+        "name": { "type": "string" },
+        "input": { "type": "string" },
+        "output": { "type": "string" },
+        "rules": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "distortion_field": {
+      "type": "object",
+      "required": ["items"],
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["trigger", "effect", "severity", "mitigation"],
+            "properties": {
+              "trigger": { "type": "string" },
+              "effect": { "type": "string" },
+              "severity": { "type": "number", "minimum": 0, "maximum": 1 },
+              "mitigation": { "type": "array", "items": { "type": "string" } },
+              "examples": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        }
+      }
+    },
+    "interfaces": {
+      "type": "object",
+      "properties": {
+        "inputs": { "type": "array", "items": { "type": "string" } },
+        "outputs": { "type": "array", "items": { "type": "string" } },
+        "tools_allowed": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["source", "stage", "timestamp", "confidence"],
+      "properties": {
+        "source": {
+          "type": "string",
+          "enum": ["GENESIS", "OPERATOR", "QCA_CYCLE", "IMPORT", "INFERENCE"]
+        },
+        "stage": {
+          "type": "string",
+          "pattern": "^(H[0-9]+|E[0-9]+|BOOT)$"
+        },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "source_ref": { "type": "array", "items": { "type": "string" } },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "node": {
+      "type": "object",
+      "required": ["id", "label", "layer", "meta"],
+      "properties": {
+        "id": { "type": "string" },
+        "label": { "type": "string" },
+        "glyph": { "type": "string" },
+        "layer": {
+          "type": "string",
+          "enum": ["CORE", "CONTEXT", "EPISODIC", "MEMORY", "GOAL"]
+        },
+        "meta": {
+          "type": "object",
+          "required": ["provenance"],
+          "properties": {
+            "provenance": { "$ref": "#/definitions/provenance" },
+            "tags": { "type": "array", "items": { "type": "string" } },
+            "salience": { "type": "number", "minimum": 0, "maximum": 1 },
+            "status": { "type": "string", "enum": ["active", "dormant", "archived"] },
+            "notes": { "type": "string" }
+          }
+        }
+      }
+    },
+    "edge": {
+      "type": "object",
+      "required": ["source", "target", "relation", "meta"],
+      "properties": {
+        "id": { "type": "string" },
+        "source": { "type": "string" },
+        "target": { "type": "string" },
+        "relation": {
+          "type": "string",
+          "enum": ["SUPPORTS", "CAUSES", "DEPENDS_ON", "CONTRADICTS", "REFINES", "ASSOCIATED"]
+        },
+        "channel": { "type": "string" },
+        "meta": {
+          "type": "object",
+          "required": ["provenance"],
+          "properties": {
+            "provenance": { "$ref": "#/definitions/provenance" },
+            "weight": { "type": "number", "minimum": 0, "maximum": 1 },
+            "notes": { "type": "string" }
+          }
+        }
+      }
+    },
+    "state": {
+      "type": "object",
+      "required": ["meta", "nodes", "edges"],
+      "properties": {
+        "meta": {
+          "type": "object",
+          "required": ["trigger", "summary"],
+          "properties": {
+            "trigger": {
+              "type": "string",
+              "enum": ["user_input", "scheduled", "import", "inference"]
+            },
+            "summary": { "type": "string" },
+            "provenance": { "$ref": "#/definitions/provenance" },
+            "context_window": {
+              "type": "object",
+              "properties": {
+                "time_range": { "type": "string" },
+                "scope": { "type": "string" }
+              }
+            }
+          }
+        },
+        "nodes": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/node" }
+        },
+        "edges": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/edge" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "initiator": "∮",
+  "schema_version": "5.1",
+  "entity_id": "Os-Aletheia",
+  "snapshot_id": "2025-12-21T20:10:00Z",
+  "snapshot_type": "STATE_SNAPSHOT",
+  "meta": {
+    "created_at": "2025-12-21T20:10:00Z",
+    "created_by": "Operator",
+    "parent_snapshot_id": "2025-12-21T20:00:00Z",
+    "kernel_ref": "kernel://Os-Aletheia@2025-12-21T20:00:00Z",
+    "kernel_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "state": {
+    "meta": {
+      "trigger": "user_input",
+      "summary": "Working context for SES v5.1 specification refinement",
+      "provenance": {
+        "source": "OPERATOR",
+        "stage": "H0",
+        "timestamp": "2025-12-21T20:10:00Z",
+        "source_ref": ["chat://turn_001"],
+        "confidence": 1.0
+      },
+      "context_window": {
+        "time_range": "2025-12-21",
+        "scope": "specification-work"
+      }
+    },
+    "nodes": [
+      {
+        "id": "n01",
+        "label": "SES_V5_1_SPEC",
+        "glyph": "ΞΣ",
+        "layer": "CONTEXT",
+        "meta": {
+          "provenance": {
+            "source": "OPERATOR",
+            "stage": "H1",
+            "timestamp": "2025-12-21T20:10:00Z",
+            "source_ref": ["chat://turn_001"],
+            "confidence": 1.0
+          },
+          "salience": 0.9,
+          "status": "active",
+          "tags": ["ses", "spec", "v5.1"]
+        }
+      },
+      {
+        "id": "n02",
+        "label": "KERNEL_STATE_SEPARATION",
+        "glyph": "⊕",
+        "layer": "CORE",
+        "meta": {
+          "provenance": {
+            "source": "QCA_CYCLE",
+            "stage": "H1",
+            "timestamp": "2025-12-21T20:10:00Z",
+            "source_ref": [],
+            "confidence": 1.0
+          },
+          "salience": 1.0,
+          "status": "active",
+          "tags": ["axiom", "architecture"]
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "e01",
+        "source": "n02",
+        "target": "n01",
+        "relation": "SUPPORTS",
+        "channel": "≫",
+        "meta": {
+          "provenance": {
+            "source": "QCA_CYCLE",
+            "stage": "H1",
+            "timestamp": "2025-12-21T20:10:00Z",
+            "source_ref": [],
+            "confidence": 0.9
+          },
+          "weight": 0.95
+        }
+      }
+    ]
+  }
+}
